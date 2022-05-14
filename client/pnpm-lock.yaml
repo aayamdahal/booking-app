@@ -9,6 +9,7 @@ specifiers:
   '@testing-library/react': ^13.2.0
   '@testing-library/user-event': ^13.5.0
   '@types/date-fns': ^2.6.0
+  date-fns: ^2.28.0
   react: ^18.1.0
   react-date-range: ^1.4.0
   react-dom: ^18.1.0
@@ -26,11 +27,14 @@ dependencies:
   '@testing-library/user-event': 13.5.0
   '@types/date-fns': 2.6.0
   react: 18.1.0
-  react-date-range: 1.4.0_react@18.1.0
+  react-date-range: 1.4.0_date-fns@2.28.0+react@18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-router-dom: 6.3.0_react-dom@18.1.0+react@18.1.0
   react-scripts: 5.0.1_react@18.1.0
   web-vitals: 2.1.4
+
+devDependencies:
+  date-fns: 2.28.0
 
 packages:
 
@@ -3903,7 +3907,6 @@ packages:
   /date-fns/2.28.0:
     resolution: {integrity: sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==}
     engines: {node: '>=0.11'}
-    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -7882,13 +7885,14 @@ packages:
       whatwg-fetch: 3.6.2
     dev: false
 
-  /react-date-range/1.4.0_react@18.1.0:
+  /react-date-range/1.4.0_date-fns@2.28.0+react@18.1.0:
     resolution: {integrity: sha512-+9t0HyClbCqw1IhYbpWecjsiaftCeRN5cdhsi9v06YdimwyMR2yYHWcgVn3URwtN/txhqKpEZB6UX1fHpvK76w==}
     peerDependencies:
       date-fns: 2.0.0-alpha.7 || >=2.0.0
       react: ^0.14 || ^15.0.0-rc || >=15.0
     dependencies:
       classnames: 2.3.1
+      date-fns: 2.28.0
       prop-types: 15.8.1
       react: 18.1.0
       react-list: 0.8.17_react@18.1.0
