@@ -5,7 +5,7 @@
 /* Style the navbar */
 .topnav {
   overflow: hidden;
-  background-color: #e9e9e9;
+  background-color: #1a1a1a;
 }
 
 /* Navbar links */
@@ -27,7 +27,13 @@
 
 /* Active/current link */
 .topnav a.active {
-  background-color: #2196f3;
+  background: linear-gradient(
+    90deg,
+    rgba(35, 39, 43, 1) 0%,
+    rgba(14, 18, 22, 1) 35%,
+    rgba(42, 42, 42, 1) 100%
+  );
+
   color: white;
 }
 
@@ -51,7 +57,9 @@
   padding: 6px;
   margin-top: 8px;
   margin-right: 16px;
-  background: #ddd;
+  color: white;
+  background: rgb(68, 68, 68);
+
   font-size: 17px;
   border: none;
   cursor: pointer;
