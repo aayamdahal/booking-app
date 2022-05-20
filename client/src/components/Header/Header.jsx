@@ -12,37 +12,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const Header = (props) => {
-  const node = useRef();
-
-  const clickOutside = (e) => {
-    if (node.current.contains(e.target)) {
-      // inside click
-      console.log('clicked inside');
-      return;
-    }
-    // outside click
-    console.log('clicked outside scope');
-    setOpenDate(false);
-    setOpenOptions(false);
-  };
-
   const [openDate, setOpenDate] = useState(false);
+  const [destination, setDestination] = useState('');
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
     room: 1,
   });
-  useEffect(() => {
-    document.addEventListener('mousedown', clickOutside);
 
-    // clean up function before running new effect
-    return () => {
-      document.removeEventListener('mousedown', clickOutside);
-    };
-  }, [openDate, openOptions]);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -50,6 +31,9 @@ const Header = (props) => {
       key: 'selection',
     },
   ]);
+
+  const navigate = useNavigate();
+
   const handleOptionChange = (name, operation) => {
     setOptions((prev) => {
       return {
@@ -60,6 +44,10 @@ const Header = (props) => {
             : Math.max(0, options[name] - 1),
       };
     });
+  };
+
+  const handleSearch = () => {
+    navigate('/hotels', { state: { destination, date, options } });
   };
 
   return (
@@ -110,12 +98,12 @@ const Header = (props) => {
                   type='text'
                   placeholder='Where are you going?'
                   className='headerSearchInput'
+                  onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
               <div className='headerSearchItem'>
                 <FontAwesomeIcon icon={faCalendarDays} className='headerIcon' />
                 <span
-                  ref={node}
                   className='headerSearchText'
                   onClick={() => {
                     setOpenDate(!openDate);
@@ -131,13 +119,13 @@ const Header = (props) => {
                     onChange={(item) => setDate([item.selection])}
                     moveRangeOnFirstSelection={false}
                     ranges={date}
+                    minDate={new Date()}
                   />
                 )}
               </div>
               <div className='headerSearchItem'>
                 <FontAwesomeIcon icon={faPerson} className='headerIcon' />
                 <span
-                  ref={node}
                   onClick={() => {
                     setOpenOptions(!openOptions);
                   }}
@@ -218,7 +206,9 @@ const Header = (props) => {
                 )}
               </div>
               <div className='headerSearchItem'>
-                <button className='headerBtn'>Search</button>
+                <button className='headerBtn' onClick={handleSearch}>
+                  Search
+                </button>
               </div>
             </div>
           </>
