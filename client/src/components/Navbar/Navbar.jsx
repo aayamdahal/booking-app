@@ -17,16 +17,13 @@ const Navbar = () => {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'cneter',
-              
+              alignItems: 'center',
             }}
           >
             <FontAwesomeIcon icon={faHotel} />
             <span
               style={{
                 marginLeft: '8px',
-
-               
               }}
             >
               Booking App
