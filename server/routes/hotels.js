@@ -1,18 +1,10 @@
 const express = require('express');
+const createHotel = require('../controllers/hotel');
 const Hotel = require('../model/Hotel');
+const { createError } = require('../utils/errors');
 const router = express.Router();
-
 // CREATE
-router.post('/', async (req, res) => {
-  const newHotel = new Hotel(req.body);
-  try {
-    const savedHotel = await newHotel.save();
-    res.status(200).json(savedHotel);
-  } catch (error) {
-    res.status(500).json(error);
-    console.log(error);
-  }
-});
+router.post('/', createHotel);
 // UPDATE
 router.put('/:id', async (req, res) => {
   try {
@@ -55,6 +47,8 @@ router.get('/:id', async (req, res) => {
 // GET ALL
 
 router.get('/', async (req, res) => {
+  // const failed = true;
+  // if (failed) return next(createError(401, 'You are not authorized'));
   try {
     const hotels = await Hotel.find();
     res.status(200).json(hotels);
