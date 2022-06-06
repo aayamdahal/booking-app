@@ -1,3 +1,5 @@
+const Hotel = require('../model/Hotel');
+
 const createHotel = async (req, res, next) => {
   const newHotel = new Hotel(req.body);
   try {
@@ -22,4 +24,44 @@ const updateHotel = async (req, res, next) => {
   }
 };
 
-(module.exports = createHotel), updateHotel;
+const deleteHotel = async (req, res, next) => {
+  try {
+    await Hotel.findByIdAndDelete(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json('hotel has been deleted');
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error);
+  }
+};
+
+const getAllHotelById = async (req, res, next) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    res.status(200).json(hotel);
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error);
+  }
+};
+
+const getAllHotel = async (req, res, next) => {
+  try {
+    const hotels = await Hotel.find();
+    res.status(200).json(hotels);
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error);
+  }
+};
+
+module.exports = {
+  createHotel,
+  updateHotel,
+  deleteHotel,
+  getAllHotelById,
+  getAllHotel,
+};
