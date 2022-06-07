@@ -30,8 +30,8 @@ const login = async (req, res, next) => {
     );
     if (!isPasswordCorrect)
       return next(createError(400, 'Username or Password incorrect'));
-
-    res.status(200).send(`${user.username} is logged in`);
+    const { password, isAdmin, ...otherDetails } = user._doc;
+    res.status(200).json({ ...otherDetails });
   } catch (error) {
     next(error);
     console.log(error);
