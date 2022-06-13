@@ -6,6 +6,7 @@ const authRoute = require('./routes/auth');
 const hotelRoute = require('./routes/hotels');
 const roomsRoute = require('./routes/rooms');
 const usersRoute = require('./routes/users');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const port = process.env.PORT || 8080;
@@ -24,6 +25,7 @@ const start = async () => {
 };
 start();
 // middleware
+app.use(cookieParser());
 
 app.use(express.json());
 

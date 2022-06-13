@@ -1,0 +1,28 @@
+const jwt = require('jsonwebtoken');
+const createError = require('./errors');
+
+const verifyToken = (req, res, next) => {
+  const token = req.cookies.access_token;
+  if (!token) {
+    return next(createError(401, 'You are unauthorized'));
+  }
+
+  jwt.verify(token, process.env.JWT, (err, user) => {
+    //user bhaneko information
+    if (err) return next(createError(403, 'Invalid Token'));
+    req.user = user;
+    next();
+  });
+};
+
+const verifyUser = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.id === req.params.id || req.user.isAdmin) {
+      next();
+    } else {
+      return next(createError(403, 'You are not authorized'));
+    }
+  });
+};
+
+module.exports = { verifyToken, verifyUser,verifyAdmin };
