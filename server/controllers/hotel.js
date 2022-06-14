@@ -10,6 +10,7 @@ const createHotel = async (req, res, next) => {
     next(err);
   }
 };
+
 const updateHotel = async (req, res, next) => {
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
