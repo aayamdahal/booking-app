@@ -8,13 +8,14 @@ const {
 } = require('../controllers/hotel');
 const Hotel = require('../model/Hotel');
 const { createError } = require('../utils/errors');
+const { verifyAdmin } = require('../utils/verifyToken');
 const router = express.Router();
 // CREATE
-router.post('/', createHotel);
+router.post('/', verifyAdmin, createHotel);
 // UPDATE
-router.put('/:id', updateHotel);
+router.put('/:id', verifyAdmin, updateHotel);
 // DELETE
-router.delete('/:id', deleteHotel);
+router.delete('/:id', verifyAdmin, deleteHotel);
 // GET BY ID
 router.get('/:id', getAllHotelById);
 
